@@ -6,7 +6,7 @@ LINE_LENGTH = 10
 
 
 def greyscale(image_list):
-    
+
     """ Convert the image_list to greyscale by replacing the r, g, b
         values with an average of the 3 values.
 
@@ -17,16 +17,16 @@ def greyscale(image_list):
 
     """ iterate over every pixel in the image """
 
-    for y in range(cols):
-        for x in range(rows):
-                    
+    for y in range(4):
+        for x in range(4):
+
             rgb = pixels[x,y]
 
 
             avg = int((rgb[0]+rgb[1]+rgb[2])/3)
             pixels[x,y] = (avg, avg, avg)
 
-             
+
     return image_list
 
 
@@ -36,7 +36,22 @@ def only_red(image_list):
 
 	:return image_list
 	"""
-    return image_list
+
+    # create our 2D structure of pixels from the image so we can work with individual pixels
+    pixels = image_list
+
+
+    # iterate over every pixel in the image
+    for y in range(4):
+        for x in range(4):
+            # get the rgb value of the pixel (as a tuple in the order (red, green, blue))
+            rgb = pixels[x,y]
+
+            # set the pixel to a new RGB value (in this instance, we keep the original
+            # blue value and set the red and green to 0)
+            pixels[x,y] = (0,0, rgb[2])
+
+    return pixels
 
 
 def only_blue(image_list):
