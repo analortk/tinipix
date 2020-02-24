@@ -3,7 +3,7 @@ import os.path
 OPTION_RANGE = 6
 HEADER_LENGTH = 3
 LINE_LENGTH = 10
-
+import pdb;
 
 def greyscale(image_list):
 
@@ -31,27 +31,18 @@ def greyscale(image_list):
 
 
 def only_red(image_list):
-    """ Remove the green and blue channels in image_list by setting them
-	to zero.
+    # image_list is an array of arrays and looks like this [[255,1,2],[123,0,0]] (array is a list)
+    # uncomment this to enable debugger so you can play around with it in the terminal and see what things are, eg image_list
+    # pdb.set_trace()
 
-	:return image_list
-	"""
+    # each array in image_list is an array of RGB values, ie [255,1,2]. We want to loop over each rgb array and make them all red rgb(255,0,0) by changing
+    # red = 255 green = 0 blue = 0
+    for rgb in image_list:
+        rgb[0] = 255
+        rgb[1] = 0
+        rgb[2] = 0
+    return image_list
 
-    # create our 2D structure of pixels from the image so we can work with individual pixels
-    pixels = image_list
-
-
-    # iterate over every pixel in the image
-    for y in range(4):
-        for x in range(4):
-            # get the rgb value of the pixel (as a tuple in the order (red, green, blue))
-            rgb = pixels[x,y]
-
-            # set the pixel to a new RGB value (in this instance, we keep the original
-            # blue value and set the red and green to 0)
-            pixels[x,y] = (0,0, rgb[2])
-
-    return pixels
 
 
 def only_blue(image_list):
