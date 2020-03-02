@@ -1,121 +1,228 @@
+# Student numbers: 18068712 and 18098087
+
 import os.path
 
-OPTION_RANGE = 6
+OPTION_RANGE = 8
 HEADER_LENGTH = 3
 LINE_LENGTH = 10
 import pdb;
 
 def greyscale(image_list):
 
-    """ Convert the image_list to greyscale by replacing the r, g, b
-        values with an average of the 3 values.
-
+    """
+	Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+	For a greyscale filter, it is required that each pixel's RGB value is replaced by the average of the RGB value for that pixel.
+	The int (integer) function is used so that the average RGB value is returned as an integer, as RGB values cannont be floats (contain decimals).
+	A for loop is used so that each individual red, green and blue value is assigned the average value.
 	:return image_list
 	"""
 
-    """ create our 2D structure of pixels from the image so we can work with individual pixels"""
+    for rgb in image_list :
+        
+        avg = int((rgb[0] + rgb[1] + rgb[2]) / 3)
 
-    """ iterate over every pixel in the image """
-
-    for y in range(4):
-        for x in range(4):
-
-            rgb = pixels[x,y]
-
-
-            avg = int((rgb[0]+rgb[1]+rgb[2])/3)
-            pixels[x,y] = (avg, avg, avg)
-
+        rgb[0] = avg
+        rgb[1] = avg
+        rgb[2] = avg
 
     return image_list
 
 
 def only_red(image_list):
-    # image_list is an array of arrays and looks like this [[255,1,2],[123,0,0]] (array is a list)
-    # uncomment this to enable debugger so you can play around with it in the terminal and see what things are, eg image_list
-    # pdb.set_trace()
+    '''
+    Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the only red filter, it is required that each pixels green and blue value is set to zero, while the red value remains unchanged.
+    For example, the pixel [150,25,67] is changed to [150,0,0].
+    :return image_list
+    '''
 
-    # each array in image_list is an array of RGB values, ie [255,1,2]. We want to loop over each rgb array and make them all red rgb(255,0,0) by changing
-    # red = 255 green = 0 blue = 0
-    for rgb in image_list:
-        rgb[0] = 255
+    for rgb in image_list :
+
         rgb[1] = 0
         rgb[2] = 0
+        
     return image_list
 
 
 
 def only_blue(image_list):
-    """ Remove the green and red channels in image_list by setting them
-	to zero.
 
-	:return image_list
-	"""
+    '''
+    Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the only blue filter, it is required that each pixels red and green value is set to zero, while the blue value remains unchanged.
+    For example, the pixel [150,25,67] is changed to [0,0,67].
+    :return image_list
+    '''
 
+    for rgb in image_list :
+        
+        rgb[0] = 0
+        rgb[1] = 0
+
+    
     return image_list
 
 
 def only_green(image_list):
-    """ Remove the blue and red channels in image_list by setting them
-	to zero.
 
-	:return image_list
-	"""
+    '''
+    Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the only green filter, it is required that each pixels red and blue value is set to zero, while the green value remains unchanged.
+    For example, the pixel [150,25,67] is changed to [0,25,0].
+    :return image_list
+    '''
+
+    for rgb in image_list :
+
+        rgb[0] = 0
+
+        rgb[2] = 0
 
     return image_list
 
 
 def negative_red(image_list):
-    """ Change the red channel in the image_list to its negative value
-	by subtracting the value from 255.
-
-	:return image_list
+    """
+	Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the negative red filter, it is required that each pixels red value is changed to 255 minus its inital value, while the green and blue
+    values remain unchanged.
+    For example, the pixel [150,25,67] is changed to [105,25,67].
+    :return image_list
 	"""
+
+    for rgb in image_list :
+        
+        rgb[0] = 255 - rgb[0]
 
     return image_list
 
 
 def negative_green(image_list):
-    """ Change the green channel in image_list to its negative value
-	by subtracting the value from 255.
-
-	:return image_list
+    """
+	Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the negative green filter, it is required that each pixels green value is changed to 255 minus its inital value, while the red and blue
+    values remain unchanged.
+    For example, the pixel [150,25,67] is changed to [150,230,67].
+    :return image_list
 	"""
+
+    for rgb in image_list :
+        
+        rgb[1] = 255 - rgb[1]
+
     return image_list
 
 
 def negative_blue(image_list):
-    """ Change the blue channel in the image to its negative value
-	by subtracting the value from 255.
-
-	:return image_list
+    """
+	Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the negative blue filter, it is required that each pixels blue value is changed to 255 minus its inital value, while the red and green
+    values remain unchanged.
+    For example, the pixel [150,25,67] is changed to [150,25,188].
+    :return image_list
 	"""
+
+    for rgb in image_list :
+        
+        rgb[2] = 255 - rgb[2]
 
     return image_list
 
 
 def negative_image(image_list):
-    """ Change image_list to a negative by subtracting the value
-	of each pixel from 255.
-
-	Hint: use somme of the other functions you've written.
-
-	:return image_list
+    """
+	Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    For the negative image filter, it is required that each pixels red, blue and green value is changed to 255 minus its inital value.
+    For example, the pixel [150,25,67] is changed to [105,230,188].
+    :return image_list
 	"""
+
+    for rgb in image_list :
+        
+        rgb[0] = 255 - rgb[0]
+        rgb[1] = 255 - rgb[1]
+        rgb[2] = 255 - rgb[2]
 
     return image_list
 
 
 def extreme_contrast(image_list):
-    """ Change pixels in image_list to either 0 or 255. If the current value is
-	less than the midpoint, set to zero. If the current value is greater than
-	the midpoint, set to 255.
-
+    """ Change pixels in image_list to either 0 or 255. If the current r, g or b value is
+	less than the 127, set to zero. If the current r, g or b  value is greater than
+	the 127, set to 255.
 	:return image_list
+
 	"""
+    for rgb in image_list :
+        
+        if rgb[0] < 127:
+            rgb[0] = 0
+        else:
+            rgb[0] = 255
+
+        if rgb[0] < 127:
+            rgb[1] = 0
+        else:
+            rgb[1] = 255
+            
+        if rgb[0] < 127:
+            rgb[2] = 0
+        else:
+            rgb[2] = 255
 
     return image_list
 
+def sepia_filter(image_list):
+    '''
+    Image list is an array of arrays, in other words, is a list of pixels containing RGB values in a list.
+    This function calculates weighted values (sepia effect) for the rgb values of each pixel and then checks if the new calculated values
+    are greater than 255, as no pixel value can be greater than 255.
+    :return image_list
+    '''
+
+    for rgb in image_list :
+
+        sep_red = int(rgb[0] * 0.393 + rgb[1] * 0.769 + rgb[2] * 0.189)
+        sep_green = int(rgb[0] * 0.349 + rgb[1] * 0.686 + rgb[2] * 0.168)
+        sep_blue = int(rgb[0] * 0.272 + rgb[1] * 0.534 + rgb[2] * 0.131)
+
+        if sep_red > 255 :
+            sep_red = 255
+
+        if sep_green > 255 :
+            sep_green = 255
+
+        if sep_blue > 255 :
+            sep_blue = 255
+
+        rgb[0] = sep_red
+        rgb[1] = sep_green
+        rgb[2] = sep_blue
+
+    return image_list
+
+def black_white(image_list):
+    '''
+    This function is similar to extreme contrast but used the average of the rgb values for each pixel to determine
+    where the r, g or b values should be assigned a zero or 255. It is an alternative way to create a black and white image.
+    :return image_list
+    '''
+
+    for rgb in image_list :
+
+        avg = int((rgb[0]+rgb[1]+rgb[2])/3)
+
+        if avg < 128 :
+            rgb[0] = 0
+            rgb[1] = 0
+            rgb[2] = 0
+        else :
+            rgb[0] = 255
+            rgb[1] = 255
+            rgb[2] = 255
+
+
+    return image_list
 
 def print_menu():
     print("\n\n\toptions: ")
@@ -125,6 +232,8 @@ def print_menu():
     print("\t\t[4]  just the blues")
     print("\t\t[5]  negative image")
     print("\t\t[6]  extreme contrast")
+    print("\t\t[7]  sepia filter")
+    print("\t\t[8]  black and white")
 
 
 def get_menu_option(prompt):
@@ -238,8 +347,9 @@ if __name__ == "__main__":
     rows, cols = get_dimensions(input_image_filename)
 
     image_list = read_image(input_image_filename)
-
-    output_image_filename = input("\n\tenter the name of the output file: ")
+    
+    print('\n\tadd ".ppm" to the end of the filename so that the output is an image')
+    output_image_filename = input("\n\tenter the name of the output file : ")
 
     prompt = "\n\tyour choice: "
     menu_choice = get_menu_option(prompt)
@@ -249,12 +359,16 @@ if __name__ == "__main__":
     elif menu_choice == 2:
         only_red(image_list)
     elif menu_choice == 3:
-        only_blue(image_list)
-    elif menu_choice == 4:
         only_green(image_list)
+    elif menu_choice == 4:
+        only_blue(image_list)
     elif menu_choice == 5:
         negative_image(image_list)
     elif menu_choice == 6:
         extreme_contrast(image_list)
+    elif menu_choice == 7:
+        sepia_filter(image_list)
+    elif menu_choice == 8:
+        black_white(image_list)
     write_image(rows, cols, image_list, output_image_filename)
     print("\nImage written to file", output_image_filename)
